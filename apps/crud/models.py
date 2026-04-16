@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
         default=datetime.now,
         onupdate=datetime.now
     )
+    user_images = db.relationship("UserImage", backref='user')
 
     @property
     def password(self):
