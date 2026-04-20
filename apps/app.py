@@ -21,14 +21,6 @@ def create_app(config_key):
 
     app.config.from_object(config[config_key])
 
-    app.config.from_mapping(
-        SECRET_KEY=os.environ.get('FLASK_SECRET_KEY'),
-        SQLALCHEMY_DATABASE_URI=f"sqlite:///{Path(__file__).parent.parent / 'local.sqlite'}",
-        SQLALCHEMY_TRACK_MODIFICATIONS=False,
-        SQLALCHEMY_ECHO=True,
-        WTF_CSRF_SECRET_KEY=os.environ.get("FLASK_SECRET_KEY"),
-    )
-
     csrf.init_app(app)
     db.init_app(app)
     Migrate(app, db)
